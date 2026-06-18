@@ -1,9 +1,6 @@
-import express from "express";
-const app = express();
+import app from './app';
 import {env} from './config/env';
 import { interactWithDB } from "./db/index";
-
-
 
 
 const main = async () => {
@@ -12,7 +9,7 @@ const main = async () => {
 
      
      app.listen(env.PORT, () => {
-      console.log(`🚀 Server running on port ${env.PORT}`);
+      console.log(`🚀 Server running on port ${env.PORT} http://localhost:${env.PORT}`);
     });
 
   }catch(err){
