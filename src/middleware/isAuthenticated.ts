@@ -37,7 +37,7 @@ export const isAuthenticated = async  (req:Request,res:Response,next:NextFunctio
 
         req.user = decoded
 
-        console.log("user Data 1: ",decoded);
+        // console.log("user Data 1: ",decoded);
 
 
        next();

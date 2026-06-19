@@ -30,7 +30,7 @@ const CreateIssue = async (req:Request, res:Response) =>{
          sendResponse(res, {
             statusCode: httpStatus.BAD_REQUEST,
             success: false,
-            message: error instanceof Error ? error.message : "An error occurred while logging in",
+            message: error instanceof Error ? error.message : "An error occurred while create issue",
             error: error 
         })
     }
@@ -79,18 +79,114 @@ const GetAllIssues = async (req: Request, res: Response) =>{
 
 const GetIssueById = async (req: Request, res: Response) =>{
     try {
+          const id  = Number(req.params.id);
+          const result = await IssueServices.GetIssueByIdIntoDb((id));
+
+           const finalData = {
+            id: result.id,
+            title: result.title,
+            description: result.description,
+            type: result.type,
+            status: result.status,
+            reporter: {
+                id: result.reporter_id,
+                name: result.reporter_name,
+                role: result.reporter_role,
+            },
+            created_at: result.created_at,
+            updated_at: result.updated_at,
+            };
+
+
+         sendResponse(res,{
+            statusCode: httpStatus.OK,
+             success: true,
+             message : "Issue retrived successfully ",
+             data: finalData
+        })
+
+
+
         
     } catch (error) {
-        
+          sendResponse(res, {
+            statusCode: httpStatus.BAD_REQUEST,
+            success: false,
+            message: error instanceof Error ? error.message : "An error occurred while Get Issue by id",
+            error: error 
+         })
     }
 }
 
   
+const updateIssueById = async (req: Request, res: Response) =>{
+    try {
+          const id  = Number(req.params.id);
+          const result = await IssueServices.UpdateIssueByIdIntoDb(req.body,id);
+
+           const finalData = {
+            id: result.id,
+            title: result.title,
+            description: result.description,
+            type: result.type,
+            status: result.status,
+            reporter_id:result.reporter_id,
+            created_at: result.created_at,
+            updated_at: result.updated_at,
+            };
+
+
+         sendResponse(res,{
+            statusCode: httpStatus.OK,
+             success: true,
+             message : "Issue updated successfully ",
+             data: finalData
+        })
+
+
+
+        
+    } catch (error) {
+          sendResponse(res, {
+            statusCode: httpStatus.BAD_REQUEST,
+            success: false,
+            message: error instanceof Error ? error.message : "An error occurred while UpDate Issue by id",
+            error: error 
+         })
+    }
+}
+
+const DeleteIssueById = async (req: Request, res: Response) =>{
+    try {
+          const id  = Number(req.params.id);
+          const result = await IssueServices.DeleteIssueByIdIntoDb(id);
+
+
+         sendResponse(res,{
+            statusCode: httpStatus.OK,
+             success: true,
+             message : "Issue deleted successfully "
+        })
+
+
+
+        
+    } catch (error) {
+          sendResponse(res, {
+            statusCode: httpStatus.BAD_REQUEST,
+            success: false,
+            message: error instanceof Error ? error.message : "An error occurred while Deleted Issue by id",
+            error: error 
+         })
+    }
+}
 
 
 
 export const IssueController = {
      CreateIssue,
      GetAllIssues,
-     GetIssueById
+     GetIssueById,
+     updateIssueById,
+     DeleteIssueById
 }
