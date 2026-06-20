@@ -42,21 +42,21 @@ const GetAllIssueIntoDb = async (query: {
   const values: any[] = [];
   let index = 1;
 
-  // TYPE filter
+  
   if (query.type) {
     baseQuery += ` AND i.type = $${index}`;
     values.push(query.type);
     index++;
   }
 
-  // STATUS filter
+
   if (query.status) {
     baseQuery += ` AND i.status = $${index}`;
     values.push(query.status);
     index++;
   }
 
-  // SORT
+
   const sortOrder =
     query.sort === "oldest" ? "ASC" : "DESC";
 
