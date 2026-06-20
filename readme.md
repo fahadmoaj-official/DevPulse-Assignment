@@ -22,7 +22,7 @@ A robust backend API for managing issues and user authentication, built with Typ
 **DevPulse** is a comprehensive issue tracking backend system designed for collaborative development teams. It provides secure user authentication, role-based authorization, and complete CRUD operations for issue management.
 
 - **Version:** 1.0.0
-<!-- - **License:** ISC -->
+- **Project live Url:** http://localhost:3000/
 
 ---
 
@@ -131,43 +131,6 @@ A robust backend API for managing issues and user authentication, built with Typ
 | PATCH | `/api/issues/:id` | Update issue details | ✅ | Maintainer (any issue) OR Contributor (own issue, only if status is open) |
 | DELETE | `/api/issues/:id` | Delete an issue | ✅ | Maintainer |
 
-#### Request/Response Examples
-
-**POST /api/auth/signup**
-```json
-{
-  "name": "John Doe",
-  "email": "john@example.com",
-  "password": "securePassword123",
-  "role": "contributor"
-}
-```
-
-**POST /api/auth/login**
-```json
-{
-  "email": "john@example.com",
-  "password": "securePassword123"
-}
-```
-
-**POST /api/issues** (Authenticated)
-```json
-{
-  "title": "Login button not working",
-  "description": "The login button on homepage is not responding to clicks",
-  "type": "bug",
-  "status": "open"
-}
-```
-
-**PATCH /api/issues/:id** (Authenticated, Authorized)
-```json
-{
-  "status": "in_progress",
-  "description": "Updated issue description"
-}
-```
 
 ---
 
