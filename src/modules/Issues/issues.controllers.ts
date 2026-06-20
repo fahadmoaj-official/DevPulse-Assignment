@@ -40,7 +40,7 @@ const CreateIssue = async (req:Request, res:Response) =>{
 const GetAllIssues = async (req: Request, res: Response) =>{
     try {
 
-        const result = await IssueServices.GetAllIssueIntoDb();
+        const result = await IssueServices.GetAllIssueIntoDb(req.query);
 
 
             const finalData = result.map((issue) => ({
